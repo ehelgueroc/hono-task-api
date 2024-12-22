@@ -10,6 +10,8 @@ Create a new project with Hono CLI:
 pnpm create hono-app@latest
 ```
 
+## Configure eslint
+
 Once the project is created, you can configure eslint:
 
 ```bash
@@ -21,6 +23,38 @@ A menu is going to be shown, select the following options:
 - Select framework: None
 - Select a extra utils: Formatter
 - Update .vscode/settings.json: Yes
+
+Once you have antfu eslint config installed, you can add additional eslint config in the `eslint.config.js` file:
+
+```js
+// is a predefined eslint config
+import antfu from "@antfu/eslint-config";
+
+export default antfu({
+  type: "app",
+  formatters: true,
+  typescript: true,
+  stylistic: {
+    indent: 2,
+    semi: true,
+    quotes: "double",
+  },
+});
+```
+
+In package.JSON, add the following scripts:
+
+```json
+{
+  "scripts": {
+    // ...
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  }
+}
+```
+
+## Run server
 
 Then, you can start the project:
 
