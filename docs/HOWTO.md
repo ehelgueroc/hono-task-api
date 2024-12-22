@@ -33,7 +33,7 @@ pnpm dev
 Create a new API in the `src/index.ts` file:
 
 ```ts
-import { Hono } from 'hono'
+import { Hono } from "hono";
 
-const app = new Hono()
+const app = new Hono();
 ```
