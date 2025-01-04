@@ -1,26 +1,9 @@
-import type { PinoLogger } from "hono-pino";
+import createApp from "./lib/create-app.js";
 
-import { OpenAPIHono } from "@hono/zod-openapi";
-import { notFound, onError, serveEmojiFavicon } from "stoker/middlewares";
-
-import { pinoLoggerMiddleware } from "./middlewares/pino-logger.js";
-
-interface AppBindings {
-  Variables: {
-    logger: PinoLogger;
-  };
-}
-
-// extended hono that supports openapi
-const app = new OpenAPIHono<AppBindings>();
-app.use(serveEmojiFavicon("🔥"));
-app.use(pinoLoggerMiddleware());
+const app = createApp();
 
 app.get("/", (c) => {
   return c.text("Hello Hono!");
 });
-
-app.notFound(notFound);
-app.onError(onError);
 
 export default app;
