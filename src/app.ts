@@ -1,9 +1,7 @@
+import configureOpenAPI from "./lib/configure-openapi.js";
 import createApp from "./lib/create-app.js";
 
 const app = createApp();
-
-app.get("/", (c) => {
-  return c.text("Hello Hono!");
-});
+configureOpenAPI(app);
 
 export default app;

@@ -9,7 +9,7 @@ import type { AppBindings } from "./types.js";
 
 export default function createApp(): OpenAPIHono<AppBindings> {
   // extended hono that supports openapi
-  const app = new OpenAPIHono<AppBindings>();
+  const app = new OpenAPIHono<AppBindings>({ strict: false });
   app.use(serveEmojiFavicon("🔥"));
   app.use(pinoLoggerMiddleware());
 
