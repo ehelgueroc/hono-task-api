@@ -4,13 +4,16 @@ import configureOpenAPI from "@/lib/configure-openapi.js";
 import createApp from "@/lib/create-app.js";
 // this is the index route
 import index from "@/routes/index.routes.js";
+import tasks from "@/routes/tasks/tasks.index.js";
 
 // create the app
 const app = createApp();
 // load routes
 const routes = [
   index,
+  tasks,
 ];
+
 // configure open api schema
 configureOpenAPI(app);
 
