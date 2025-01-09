@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { expand } from "dotenv-expand";
 import { z } from "zod";
 
+// get the env vars from the .env file
 expand(config());
 
 // define env schema to validate and coerce env vars
@@ -13,6 +14,7 @@ const EnvSchema = z.object({
   LOG_LEVEL: z.enum(["trace", "debug", "info", "warn", "error", "fatal"]),
 });
 
+// generate type from env schema
 export type Env = z.infer<typeof EnvSchema>;
 
 // eslint-disable-next-line import/no-mutable-exports
@@ -24,6 +26,7 @@ try {
   env = EnvSchema.parse(process.env);
 }
 catch (e) {
+  // return error if parsing fails
   const error = e as z.ZodError;
   console.error(`❌ Invalid environment variables:`);
   console.error(error.flatten().fieldErrors);
