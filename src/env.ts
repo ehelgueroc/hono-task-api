@@ -9,9 +9,20 @@ expand(config());
 const EnvSchema = z.object({
   // transform to number the PORT env var value
   PORT: z.coerce.number().default(9999),
-
   NODE_ENV: z.string().default("development"),
   LOG_LEVEL: z.enum(["trace", "debug", "info", "warn", "error", "fatal"]),
+  DATABASE_URL: z.string().url(),
+  DATABASE_AUTH_TOKEN: z.string().optional(),
+}).superRefine((input, ctx) => {
+  if (input.NODE_ENV === "production" && !input.DATABASE_AUTH_TOKEN) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.invalid_type,
+      expected: "string",
+      received: "undefined",
+      message: "DATABASE_AUTH_TOKEN is required in production",
+      path: ["DATABASE_AUTH_TOKEN"],
+    });
+  }
 });
 
 // generate type from env schema
