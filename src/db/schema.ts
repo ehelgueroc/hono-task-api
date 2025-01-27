@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { createSelectSchema } from "drizzle-zod";
 
 const defaultNow = sql`(cast((julianday('now') - 2440587.5)*86400000 as integer))`;
 export const tasks = sqliteTable("tasks", {
@@ -16,3 +17,5 @@ export const tasks = sqliteTable("tasks", {
     .$onUpdate(() => new Date())
     .default(defaultNow),
 });
+
+export const selectTasksSchema = createSelectSchema(tasks);
