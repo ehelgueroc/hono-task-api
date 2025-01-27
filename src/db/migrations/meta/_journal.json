@@ -8,6 +8,20 @@
       "when": 1737356183658,
       "tag": "0000_lovely_firelord",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1738017734578,
+      "tag": "0001_silent_snowbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1738017976818,
+      "tag": "0002_amazing_dorian_gray",
+      "breakpoints": true
     }
   ]
 }
