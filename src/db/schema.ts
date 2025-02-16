@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
-import { createInsertSchema, createSelectSchema } from "drizzle-zod";
+import { createInsertSchema, createSelectSchema, createUpdateSchema } from "drizzle-zod";
 import { z } from "zod";
 
 const defaultNow = sql`(cast((julianday('now') - 2440587.5)*86400000 as integer))`;
@@ -28,3 +28,5 @@ export const insertTasksSchema = createInsertSchema(tasks, {
     done: true,
   })
   .omit({ id: true, createdAt: true, updatedAt: true });
+
+export const patchTasksSchema = insertTasksSchema.partial();
