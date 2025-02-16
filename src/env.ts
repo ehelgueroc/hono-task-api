@@ -14,6 +14,7 @@ const EnvSchema = z.object({
   DATABASE_URL: z.string().url(),
   DATABASE_AUTH_TOKEN: z.string().optional(),
 }).superRefine((input, ctx) => {
+  // check if DATABASE_AUTH_TOKEN is required in production
   if (input.NODE_ENV === "production" && !input.DATABASE_AUTH_TOKEN) {
     ctx.addIssue({
       code: z.ZodIssueCode.invalid_type,
