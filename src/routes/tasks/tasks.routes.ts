@@ -104,7 +104,37 @@ export const getOne = createRoute({
   },
 });
 
+export const remove = createRoute({
+  tags,
+  method: "delete",
+  path: "/tasks/{id}",
+  request: {
+    params: IdParamsSchema,
+  },
+  responses: {
+    // define the response for a successful GET request
+    [HttpStatusCodes.NO_CONTENT]: {
+      description: "Task deleted",
+    },
+    [HttpStatusCodes.UNPROCESSABLE_ENTITY]: jsonContent(
+      createErrorSchema(IdParamsSchema),
+      "Invalid id",
+    ),
+    [HttpStatusCodes.NOT_FOUND]: jsonContent(
+      z.object({
+        message: z.string(),
+      }).openapi({
+        example: {
+          message: "Not found",
+        },
+      }),
+      "Not found",
+    ),
+  },
+});
+
 export type ListRoute = typeof list;
 export type CreateRoute = typeof create;
 export type GetOneRoute = typeof getOne;
 export type PatchRoute = typeof patch;
+export type RemoveRoute = typeof remove;
